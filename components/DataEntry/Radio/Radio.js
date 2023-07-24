@@ -45,7 +45,7 @@ const App = ({idSection, options, question, questionId, questionType}) => {
       <Space direction="vertical">
       {
         options.map((option) => (
-        <Radio  onClick={(e) => handleClick(e,option)} value={option.id}>
+        <Radio key={`${idSection}-questionId`} onClick={(e) => handleClick(e,option)} value={option.id}>
             {option.description}
         </Radio>))
       }
