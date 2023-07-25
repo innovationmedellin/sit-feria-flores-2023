@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { InputNumber } from 'antd';
+import { InputNumber, Form } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { add_answer } from "../../../services/Add/Add";
 
@@ -19,7 +19,17 @@ const App = ({
     console.log("answer",answer);
   };
   return(
+    <Form.Item
+      name={questionId}
+      rules={[
+        {
+          required: true,
+          message: '¡Por favor, selecciona una opción!',
+        },
+      ]}
+    >
     <InputNumber min={1} max={max} defaultValue={5} onChange={onChange} />
+    </Form.Item>
   )
 }
 ;

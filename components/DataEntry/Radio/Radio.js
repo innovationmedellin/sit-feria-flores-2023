@@ -16,11 +16,11 @@ const App = ({idSection, options, question, questionId, questionType}) => {
     switch(consdition) {
       case "Español":
         dispatch(setStatesection({...statesection, section_2:true, section_3:false, section_4: false}));
-        answer.forEach((element,index) => { if (index>1) element.answer = []});
+        //answer.forEach((element,index) => { if (index>1) element.answer = []});
         break;
       case "English":
         dispatch(setStatesection({...statesection,section_2:false ,section_3:true, section_4: false}));
-        answer.forEach((element,index) => { if (index>1) element.answer = []});
+        //answer.forEach((element,index) => { if (index>1) element.answer = []});
         break;
       default :
         break

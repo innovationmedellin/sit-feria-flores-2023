@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Select, Tag } from 'antd';
+import { Select, Tag, Form } from 'antd';
 import { add_answer } from '../../../services/Add/Add';
 import { useSelector, useDispatch } from 'react-redux';
 import { setStatesection2, setStatesection } from '../../../store/actions';
@@ -92,19 +92,29 @@ const App = ({
   };
 
   return (
-    <Select
-      mode="multiple"
-      showArrow
-      tagRender={tagRender}
-      placeholder={placeholder}
-      onChange={ (value,options)=> handledSelect(value,options)}
-      style={{
-        width: '100%',
-        color: 'blue',
-      }}
-      value={selectedValue}
-      options={Options}
-    />
+    <Form.Item
+      name={questionId}
+      rules={[
+        {
+          required: true,
+          message: '¡Por favor, selecciona una opción!',
+        },
+      ]}
+    >
+      <Select
+        mode="multiple"
+        showArrow
+        tagRender={tagRender}
+        placeholder={placeholder}
+        onChange={ (value,options)=> handledSelect(value,options)}
+        style={{
+          width: '100%',
+          color: 'blue',
+        }}
+        value={selectedValue}
+        options={Options}
+      />
+    </Form.Item>
   );
 };
 
