@@ -5,13 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSurvey, setTemporalSection, setTemporalQuestions, setAnswer  } from '../../store/actions';
 import {mapSections}  from "../../services/Answer/Answer";
 import { axiosClient } from '../../config';
-import { Typography, Form, Button } from 'antd';
-import { useRouter } from 'next/router';
+import { Form, Button } from 'antd';
 
 const Index = () => {
-  const router = useRouter();
-  const { location } = router.query;
-  console.log("location",location)
   const [formRef] =  Form.useForm()
   const dispatch  = useDispatch();
   const survey    = useSelector((state) => state.survey);

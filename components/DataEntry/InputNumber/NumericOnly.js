@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { InputNumber, Form } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { add_answer } from "../../../services/Add/Add";
 
 const App = ({
@@ -12,11 +12,8 @@ const App = ({
   idSection,
 }) => {
   const answer = useSelector((state) => state.answer);
-  const dispatch = useDispatch();
   const onChange = (value) => {
-    console.log('changed', value, options);
     add_answer(answer, question, questionId, questionType, idSection, value, questionId)
-    console.log("answer",answer);
   };
   return(
     <Form.Item
@@ -24,7 +21,7 @@ const App = ({
       rules={[
         {
           required: true,
-          message: '¡Por favor, selecciona una opción!',
+          message: '¡Por favor, ingresa un valor!',
         },
       ]}
     >

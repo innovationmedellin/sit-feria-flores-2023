@@ -4,9 +4,11 @@ import { Select, Tag, Form } from 'antd';
 import { add_answer } from '../../../services/Add/Add';
 import { useSelector, useDispatch } from 'react-redux';
 import { setStatesection2, setStatesection } from '../../../store/actions';
+
 const municipiosValleAburra = ["Barbosa", "Bello", "Caldas", "Copacabana", "Envigado", "Girardota", "Itagui", "La Estrella", "Medellín", "Sabaneta"];
 const tagRender = (props) => {
   const { label, value, closable, onClose } = props;
+  
   const onPreventMouseDown = (event) => {
     event.preventDefault();
     event.stopPropagation();
