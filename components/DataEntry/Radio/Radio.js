@@ -25,7 +25,6 @@ const App = ({idSection, options, question, questionId, questionType}) => {
       default :
         break
     }
-    console.log("Answer", answer)
   }
 
   const onChange = (e) => {
@@ -44,8 +43,8 @@ const App = ({idSection, options, question, questionId, questionType}) => {
     <Radio.Group onChange={onChange} value={value} required>
       <Space direction="vertical">
       {
-        options.map((option) => (
-        <Radio key={`${idSection}-questionId`} onClick={(e) => handleClick(e,option)} value={option.id}>
+        options.map((option, index) => (
+        <Radio key={`${idSection}-${index}`} onClick={(e) => handleClick(e,option)} value={option.id}>
             {option.description}
         </Radio>))
       }

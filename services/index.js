@@ -1,4 +1,5 @@
 export { default as surveys }   from './surveys/surveys';
+export { locationTitle } from "./LocationTitle";
 
 // [
 //     {

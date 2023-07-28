@@ -31,20 +31,18 @@ const Index = () => {
     };
     fetchData('/surveys?filters[id][$eq]=33');
   }, []);
+
+
   const onFinish = (values) => {
     //formRef.resetFields()
-    console.log('Formulario enviado:', values);
-    console.log("answer",answer);
     const postAnswer = async ({data}) => {
       try {
           const response = await axiosClient.post('/survey-answers', {
             data
           });
-          console.log("responsePost",response)
           return response.data
-          
       } catch(error) {
-        console.log("error",error)
+        console.log("error",error);
       }
     }
     postAnswer(
@@ -58,9 +56,13 @@ const Index = () => {
       },
     )
    };
+
+
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+
+
   return (
     <Layout
       background   =  { (theme) => theme.colors.fondogris }
@@ -135,12 +137,8 @@ const Index = () => {
             backgroundColor:"#00AEEF",
             color: "white",
             borderRadius: "10px",
-            border: "none",
-            "focus":{
-              transform: "scale(1.1)",
-            }
+            border: "none"
           }}
-        
         >
         <Button 
           style={{

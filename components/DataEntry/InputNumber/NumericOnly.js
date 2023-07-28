@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import   PropTypes from "prop-types";
 import { InputNumber, Form } from 'antd';
 import { useSelector } from 'react-redux';
 import { add_answer } from "../../../services/Add/Add";
@@ -18,6 +18,7 @@ const App = ({
   return(
     <Form.Item
       name={questionId}
+      initialValue={""}
       rules={[
         {
           required: true,
@@ -25,7 +26,7 @@ const App = ({
         },
       ]}
     >
-    <InputNumber min={1} max={max} defaultValue={5} onChange={onChange} />
+    <InputNumber placeholder="Ingrese la cantidad" min={1} max={max} defaultValue={5} onChange={onChange} />
     </Form.Item>
   )
 }

@@ -2,16 +2,20 @@ import { useEffect } from 'react';
 import { Section, Section2 } from '../../section';
 import { Layout, Header } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSurvey, setTemporalSection, setTemporalQuestions, setAnswer  } from '../../store/actions';
-import {mapSections}  from "../../services/Answer/Answer";
+import { setSurvey, setTemporalSection, setAnswer  } from '../../store/actions';
+import { mapSections }  from "../../services/Answer/Answer";
 import { axiosClient } from '../../config';
 import { Form, Button } from 'antd';
 import { useRouter } from 'next/router';
+import { LocationTitle } from '../../services/LocationTitle';
+import  useFeedback  from '../../hooks/useFeedback/useFeedback';
+import  Head from 'next/head';
+
 
 const Index = () => {
   const router = useRouter();
+  const { sending, notificationAnswer, notificationAnswerNegative }  = useFeedback();
   const { location } = router.query;
-  console.log("location",location);
   const [formRef] =  Form.useForm();
   const dispatch  = useDispatch();
   const survey    = useSelector((state) => state.survey);
@@ -26,9 +30,7 @@ const Index = () => {
         const response = await axiosClient(url);
         dispatch(setSurvey(response.data));
         dispatch(setTemporalSection(response.data.data[0].attributes.data.sections));
-        dispatch(setAnswer(mapSections(response.data.data[0].attributes.data.sections)));
-        dispatch(setAnswer(mapSections(response.data.data[0].attributes.data.sections)));
-        //console.log(temporal_section)
+        dispatch(setAnswer(mapSections(response.data.data[0].attributes.data.sections, location)));
       } catch (error) {
         console.error(error);
       }
@@ -36,38 +38,51 @@ const Index = () => {
     fetchData('/surveys?filters[id][$eq]=33');
   }, []);
   const onFinish = (values) => {
-    //formRef.resetFields()
-    console.log('Formulario enviado:', values);
-    console.log("answer",answer);
+    formRef.resetFields();
     const postAnswer = async ({data}) => {
       try {
           const response = await axiosClient.post('/survey-answers', {
             data
           });
-          console.log("responsePost",response)
           return response.data
-          
       } catch(error) {
         console.log("error",error)
       }
     }
-    postAnswer(
-      {
+    answer[0] = {
+      section_id: 0,
+      section_name: 'Default section',
+      answers: [
+        {
+          question: 'Ubicación',
+          answer: location,
+          question_id: '527c8',
+          answer_id: location.replace(' ', '').toLowerCase(),
+          question_type: 'text'
+        }
+      ]
+    };
+    postAnswer({
         "data":{
                 "pollster":2,
-                "survey":33,
+                "survey":  33,
                 "pollster_objetive_id":null,
                 "answers":answer
                }
-      },
-    )
-   };
+    });
+    notificationAnswer();
+   }
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
+    notificationAnswerNegative();
   };
   return (
+    <>
+    <Head>
+    <title> {LocationTitle(location)} </title>
+    </Head>
     <Layout
-      background   =  { (theme) => theme.colors.fondogris }
+      background   =  { `${(theme) => theme.colors.fondogris}` }
       maxWidth     =  { "1200px" }
       display      =  { "flex"   }
       flexDirection=  { "column" }
@@ -118,6 +133,7 @@ const Index = () => {
             description={temporal_section[3]?.description}
             questions={temporal_section[3]?.questions}
             complete_action={temporal_section[3]?.complete_action}
+            max={1000}
           />
         }
         {
@@ -128,6 +144,7 @@ const Index = () => {
             description={temporal_section[4]?.description}
             questions={temporal_section[4]?.questions}
             complete_action={temporal_section[4]?.complete_action}
+            max={5}
           />
         }
         <Form.Item
@@ -144,7 +161,6 @@ const Index = () => {
               transform: "scale(1.1)",
             }
           }}
-        
         >
         <Button 
           style={{
@@ -161,12 +177,13 @@ const Index = () => {
           htmlType="submit"
 
           > 
-          Enviar encuesta
+         {sending? "ENVIANDO ..." :"Enviar encuesta"}
         </Button>
         </Form.Item>
         </Form>
         
     </Layout>
+    </>
   )
 }
 

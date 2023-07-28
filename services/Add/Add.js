@@ -1,6 +1,6 @@
 
 export const add_answer = (answerGeneral, question, questionId, questionType, idSection, answerLocal, answer_id) => {
-    const objectanswer  = answerGeneral.filter((item) => item.section_id === idSection);
+    const objectanswer  = answerGeneral?.filter((item) => item.section_id === idSection);
     const isElementInArray = objectanswer[0].answer.some((item) => item.question === question);
     switch(isElementInArray){
         case true :

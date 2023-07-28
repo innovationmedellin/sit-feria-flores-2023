@@ -15,7 +15,7 @@ const Layout = ({children, background, maxWidth, width, display, flexDirection, 
         gap: "2rem",
       }}
     >
-      {children}
+      { children }
     </LayoutAntd>
   )
 }

@@ -2,10 +2,9 @@ import PropTypes from "prop-types";
 import axiosClient from '../../config';
 
 export const postAnswer = async ({ data }) => {
+    console.log("data en Answer data: ",data)
     try{
-        const response = await axiosClient.post('/survey-answer',{
-            data
-        });
+        const response = await axiosClient.post('/survey-answer',{data});
         return response.data;
     } catch (error) {
         console.log(error);
@@ -33,21 +32,18 @@ getSurvey.propTypes = {
     url: PropTypes.string.isRequired,
 }
 
-export const mapSections = (sections) => {
+export const mapSections = (sections, location) => {
     const sectionsArray = sections.map((section) => (
         { 
             answer:[],
             section_id: section.id,
             section_name: section.title,
         }
-    )
-    
-    )
+    ));
     return sectionsArray
 }
 
 mapSections.propTypes = {
     sections: PropTypes.array
 }
-
 

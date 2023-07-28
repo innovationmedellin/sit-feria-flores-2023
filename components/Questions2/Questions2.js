@@ -1,10 +1,11 @@
 import React from 'react'
 import {
-    Radio, 
-    Select, 
-    NumericOnly  } from '../../components'
-import { HeadLine } from '../../components'
-const Questions2 = ({question, id}) => {
+    Radio,  
+    NumericOnly,
+    SelectSingle
+  } from '../../components';
+import { HeadLine } from '../../components';
+const Questions2 = ({question, id, max}) => {
   return (
     <div
     style={{
@@ -46,7 +47,7 @@ const Questions2 = ({question, id}) => {
         }}
         >
         {  
-        question?.question_type === "single" && 
+        question?.question_type === "single" &&
         <Radio
             options={question.answer_options}
             question={question.description}
@@ -55,15 +56,15 @@ const Questions2 = ({question, id}) => {
             idSection={id}
         />
         }
-        {  
-        question?.question_type === "select" && 
-        <Select
+        {
+        question?.question_type === "select" &&
+        <SelectSingle
             optionsAnswer={question.answer_options}
             question={question.description}
             questionId={question.id}
             questionType={question.question_type}
             idSection={id}
-            placeholder={"Ingrese respuesta"}
+            placeholder={"Ingrese su respuesta"}
         />
         }
         {  
@@ -74,6 +75,7 @@ const Questions2 = ({question, id}) => {
             questionId={question.id}
             questionType={question.question_type}
             idSection={id}
+            max={max}
         />
         }
         {  
@@ -84,6 +86,7 @@ const Questions2 = ({question, id}) => {
             questionId={question.id}
             questionType={question.question_type}
             idSection={id}
+            max={max}
         />
         }
         </div>            

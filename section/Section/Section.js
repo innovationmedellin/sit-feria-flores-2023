@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import {HeadLine} from "../../components";
-import { 
+import {
+    HeadLine, 
     Radio, 
-    Select, 
-    NumericOnly 
+    SelectSingle, 
+    NumericOnly,
 } from '../../components';
 
-const Section = ({id, title, description, questions}) => {
+const Section = ({id, title, description, questions, max}) => {
   
   return(
     <div
@@ -107,7 +107,7 @@ const Section = ({id, title, description, questions}) => {
                 }
                 {  
                 question.question_type === "select" && 
-                <Select
+                <SelectSingle
                     optionsAnswer={question.answer_options}
                     question={question.description}
                     questionId={question.id}
@@ -124,9 +124,10 @@ const Section = ({id, title, description, questions}) => {
                     questionId={question.id}
                     questionType={question.question_type}
                     idSection={id}
+                    max={max}
                 />
                 }
-                {  
+                {
                 question.question_type === "lineal_scale" && 
                 <NumericOnly
                     options={ question.answer_options }
@@ -134,6 +135,7 @@ const Section = ({id, title, description, questions}) => {
                     questionId={question.id}
                     questionType={question.question_type}
                     idSection={id}
+                    max={max}
                 />
                 }
                 </div>            

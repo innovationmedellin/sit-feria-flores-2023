@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import {HeadLine} from "../../components";
 import Questions2 from '../../components/Questions2/Questions2';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 const Section = ({id, title, description, questions, questions_temporal}) => {
   const statesection2 =  useSelector((state) => state.statesection2);
   return(
@@ -55,8 +55,8 @@ const Section = ({id, title, description, questions, questions_temporal}) => {
         {statesection2.question_3 &&<Questions2 question={questions[3]} id={id}/>}
         {statesection2.question_4 &&<Questions2 question={questions[4]} id={id}/>}
         {statesection2.question_5 &&<Questions2 question={questions[5]} id={id}/>}
-        {statesection2.question_6 &&<Questions2 question={questions[6]} id={id}/>}
-        {statesection2.question_7 &&<Questions2 question={questions[7]} id={id}/>}
+        {statesection2.question_6 &&<Questions2 max={1000} question={questions[6]} id={id}/>}
+        {statesection2.question_7 &&<Questions2 max={99999999999999999} question={questions[7]} id={id}/>}
         {statesection2.question_8 &&<Questions2 question={questions[8]} id={id}/>}
         {statesection2.question_9 &&<Questions2 question={questions[9]} id={id}/>}
         {statesection2.question_10 &&<Questions2 question={questions[10]} id={id}/>}
