@@ -1,10 +1,10 @@
 
 export const add_answer = (answerGeneral, question, questionId, questionType, idSection, answerLocal, answer_id) => {
     const objectanswer  = answerGeneral?.filter((item) => item.section_id === idSection);
-    const isElementInArray = objectanswer[0].answer.some((item) => item.question === question);
+    const isElementInArray = objectanswer[0].answers.some((item) => item.question === question);
     switch(isElementInArray){
         case true :
-            const objetoRepetido = objectanswer[0].answer.filter((item) => item.question === question)
+            const objetoRepetido = objectanswer[0].answers.filter((item) => item.question === question)
             const longitufArrayRepetido = objetoRepetido.length;
             if( longitufArrayRepetido === 1){
                 objetoRepetido[0].answer = answerLocal;
@@ -12,7 +12,7 @@ export const add_answer = (answerGeneral, question, questionId, questionType, id
                 console.log("He entrado en el if")
                 break;
             } else {
-            objectanswer[0].answer = [{
+            objectanswer[0].answers = [{
                 "answer": answerLocal,
                 "question": question,
                 "answer_id": answer_id,
@@ -24,7 +24,7 @@ export const add_answer = (answerGeneral, question, questionId, questionType, id
             }
             
         case false: 
-            objectanswer[0].answer.push({
+            objectanswer[0].answers.push({
                 "answer": answerLocal,
                 "question": question,
                 "answer_id": answer_id,

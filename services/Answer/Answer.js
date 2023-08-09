@@ -35,7 +35,7 @@ getSurvey.propTypes = {
 export const mapSections = (sections, location) => {
     const sectionsArray = sections.map((section) => (
         { 
-            answer:[],
+            answers:[],
             section_id: section.id,
             section_name: section.title,
         }
