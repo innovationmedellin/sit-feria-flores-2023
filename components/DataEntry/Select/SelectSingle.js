@@ -2,6 +2,7 @@ import { Select } from 'antd';
 import { add_answer } from '../../../services/Add/Add';
 import { useSelector, useDispatch } from 'react-redux';
 import { setStatesection2, setStatesection } from '../../../store/actions';
+import { Form  } from 'antd';
 
 const SelectTest = ({ optionsAnswer, placeholder, question, questionId, questionType, idSection}) => {
   const municipiosValleAburra = ["Barbosa", "Bello", "Caldas", "Copacabana", "Envigado", "Girardota", "Itagui", "La Estrella", "Medellín", "Sabaneta"];
@@ -29,6 +30,15 @@ const SelectTest = ({ optionsAnswer, placeholder, question, questionId, question
   };
   const Options = optionsAnswer?.map((option) => ({value: option.description, id: option.id, label:option.description}))
   return(
+    <Form.Item
+    name={questionId}
+    rules={[
+      {
+        required: true,
+        message: '¡Por favor, selecciona una opción!',
+      },
+    ]}
+  >
   <Select
     showSearch
     showArrow
@@ -39,7 +49,9 @@ const SelectTest = ({ optionsAnswer, placeholder, question, questionId, question
       (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
     }
     options={Options}
+    required
   />
+  </Form.Item>
 )};
 export default SelectTest;
 
